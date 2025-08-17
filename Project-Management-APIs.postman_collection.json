@@ -1,0 +1,640 @@
+{
+	"info": {
+		"_postman_id": "project-management-microservices",
+		"name": "Project Management Microservices APIs",
+		"description": "Complete API collection for Project Management System with User, Project, and Task services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Service",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{user_service_url}}/api/users",
+							"host": [
+								"{{user_service_url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{user_service_url}}/api/users/1",
+							"host": [
+								"{{user_service_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User by Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{user_service_url}}/api/users/username/john_doe",
+							"host": [
+								"{{user_service_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"username",
+								"john_doe"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User by Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{user_service_url}}/api/users/email/john@example.com",
+							"host": [
+								"{{user_service_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"email",
+								"john@example.com"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Users by Role",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{user_service_url}}/api/users/role/MANAGER",
+							"host": [
+								"{{user_service_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"role",
+								"MANAGER"
+							]
+						},
+						"description": "Available roles: ADMIN, MANAGER, USER"
+					}
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"john_doe\",\n    \"email\": \"john@example.com\",\n    \"fullName\": \"John Doe\",\n    \"phoneNumber\": \"+1234567890\",\n    \"role\": \"USER\",\n    \"status\": \"ACTIVE\"\n}"
+						},
+						"url": {
+							"raw": "{{user_service_url}}/api/users",
+							"host": [
+								"{{user_service_url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"john_doe_updated\",\n    \"email\": \"john.updated@example.com\",\n    \"fullName\": \"John Doe Updated\",\n    \"phoneNumber\": \"+1234567891\",\n    \"role\": \"MANAGER\",\n    \"status\": \"ACTIVE\"\n}"
+						},
+						"url": {
+							"raw": "{{user_service_url}}/api/users/1",
+							"host": [
+								"{{user_service_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{user_service_url}}/api/users/1",
+							"host": [
+								"{{user_service_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Project Service",
+			"item": [
+				{
+					"name": "Get All Projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project_service_url}}/api/projects",
+							"host": [
+								"{{project_service_url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Project by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project_service_url}}/api/projects/1",
+							"host": [
+								"{{project_service_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Projects by Manager ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project_service_url}}/api/projects/manager/1",
+							"host": [
+								"{{project_service_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"manager",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Projects by Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project_service_url}}/api/projects/status/IN_PROGRESS",
+							"host": [
+								"{{project_service_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"status",
+								"IN_PROGRESS"
+							]
+						},
+						"description": "Available statuses: PLANNING, IN_PROGRESS, ON_HOLD, COMPLETED, CANCELLED"
+					}
+				},
+				{
+					"name": "Get Overdue Projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project_service_url}}/api/projects/overdue",
+							"host": [
+								"{{project_service_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"overdue"
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Projects by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project_service_url}}/api/projects/search?name=project",
+							"host": [
+								"{{project_service_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "project"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"New Project\",\n    \"description\": \"Project description\",\n    \"startDate\": \"2025-01-01\",\n    \"endDate\": \"2025-12-31\",\n    \"status\": \"PLANNING\",\n    \"priority\": \"HIGH\",\n    \"managerId\": 1,\n    \"budget\": 50000.00\n}"
+						},
+						"url": {
+							"raw": "{{project_service_url}}/api/projects",
+							"host": [
+								"{{project_service_url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated Project\",\n    \"description\": \"Updated project description\",\n    \"startDate\": \"2025-01-01\",\n    \"endDate\": \"2025-12-31\",\n    \"status\": \"IN_PROGRESS\",\n    \"priority\": \"CRITICAL\",\n    \"managerId\": 1,\n    \"budget\": 75000.00\n}"
+						},
+						"url": {
+							"raw": "{{project_service_url}}/api/projects/1",
+							"host": [
+								"{{project_service_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{project_service_url}}/api/projects/1",
+							"host": [
+								"{{project_service_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Task Service",
+			"item": [
+				{
+					"name": "Get All Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Task by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks/1",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Tasks by Project ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks/project/1",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"project",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Tasks by Assigned User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks/assigned/1",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"assigned",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Tasks by Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks/status/IN_PROGRESS",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"status",
+								"IN_PROGRESS"
+							]
+						},
+						"description": "Available statuses: TODO, IN_PROGRESS, IN_REVIEW, DONE, CANCELLED"
+					}
+				},
+				{
+					"name": "Get Overdue Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks/overdue",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"overdue"
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Tasks by Title",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks/search?title=task",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"search"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "task"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"New Task\",\n    \"description\": \"Task description\",\n    \"projectId\": 1,\n    \"assignedTo\": 2,\n    \"createdBy\": 1,\n    \"status\": \"TODO\",\n    \"priority\": \"HIGH\",\n    \"dueDate\": \"2025-02-01\",\n    \"estimatedHours\": 8\n}"
+						},
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated Task\",\n    \"description\": \"Updated task description\",\n    \"projectId\": 1,\n    \"assignedTo\": 2,\n    \"createdBy\": 1,\n    \"status\": \"IN_PROGRESS\",\n    \"priority\": \"URGENT\",\n    \"dueDate\": \"2025-02-15\",\n    \"estimatedHours\": 12,\n    \"actualHours\": 5\n}"
+						},
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks/1",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Assign Task to User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks/1/assign/2",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"1",
+								"assign",
+								"2"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Task Status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks/1/status/DONE",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"1",
+								"status",
+								"DONE"
+							]
+						},
+						"description": "Available statuses: TODO, IN_PROGRESS, IN_REVIEW, DONE, CANCELLED"
+					}
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{task_service_url}}/api/tasks/1",
+							"host": [
+								"{{task_service_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"1"
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "user_service_url",
+			"value": "http://localhost:8081",
+			"type": "string"
+		},
+		{
+			"key": "project_service_url",
+			"value": "http://localhost:8082",
+			"type": "string"
+		},
+		{
+			"key": "task_service_url",
+			"value": "http://localhost:8083",
+			"type": "string"
+		}
+	]
+}
