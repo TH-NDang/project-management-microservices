@@ -14,28 +14,28 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectDto {
-    
+
     private Long id;
-    
+
     @NotBlank(message = "Project name is required")
     private String name;
-    
+
     private String description;
-    
+
     private LocalDate startDate;
-    
+
     private LocalDate endDate;
-    
+
     private Project.ProjectStatus status;
-    
+
     private Project.ProjectPriority priority;
-    
+
     @NotNull(message = "Manager ID is required")
     private Long managerId;
-    
+
     private Double budget;
-    
+
     private LocalDateTime createdAt;
-    
+
     private LocalDateTime updatedAt;
 }

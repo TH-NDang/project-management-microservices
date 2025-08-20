@@ -14,33 +14,33 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskDto {
-    
+
     private Long id;
-    
+
     @NotBlank(message = "Task title is required")
     private String title;
-    
+
     private String description;
-    
+
     @NotNull(message = "Project ID is required")
     private Long projectId;
-    
+
     private Long assignedTo;
-    
+
     @NotNull(message = "Created by is required")
     private Long createdBy;
-    
+
     private Task.TaskStatus status;
-    
+
     private Task.TaskPriority priority;
-    
+
     private LocalDate dueDate;
-    
+
     private Integer estimatedHours;
-    
+
     private Integer actualHours;
-    
+
     private LocalDateTime createdAt;
-    
+
     private LocalDateTime updatedAt;
 }
