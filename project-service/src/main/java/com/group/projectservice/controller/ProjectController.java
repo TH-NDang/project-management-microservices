@@ -1,6 +1,7 @@
 package com.group.projectservice.controller;
 
 import com.group.projectservice.dto.ProjectDto;
+import com.group.projectservice.dto.ProjectWithUserDto;
 import com.group.projectservice.entity.Project;
 import com.group.projectservice.service.ProjectService;
 import jakarta.validation.Valid;
@@ -25,7 +26,7 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProjectDto> getProjectById(@PathVariable Long id) {
+    public ResponseEntity<ProjectWithUserDto> getProjectById(@PathVariable Long id) {
         return projectService.getProjectById(id)
                 .map(project -> ResponseEntity.ok(project))
                 .orElse(ResponseEntity.notFound().build());

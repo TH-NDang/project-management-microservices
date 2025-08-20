@@ -1,18 +1,25 @@
 package com.group.projectservice.service;
 
-import com.group.projectservice.dto.ProjectDto;
-import com.group.projectservice.entity.Project;
-import com.group.projectservice.exception.InvalidProjectDataException;
-import com.group.projectservice.exception.ProjectNotFoundException;
-import com.group.projectservice.repository.ProjectRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
+
+import com.group.projectservice.dto.ProjectDto;
+import com.group.projectservice.dto.ProjectWithUserDto;
+import com.group.projectservice.entity.Project;
+import com.group.projectservice.exception.InvalidProjectDataException;
+import com.group.projectservice.exception.ProjectNotFoundException;
+import com.group.projectservice.external.User;
+import com.group.projectservice.mapper.ProjectMapper;
+import com.group.projectservice.repository.ProjectRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +27,10 @@ import java.util.stream.Collectors;
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final ProjectMapper projectMapper;
+
+    @Value("${user-service.url}")
+    private String userServiceUrl;
 
     public List<ProjectDto> getAllProjects() {
         return projectRepository.findAll().stream()
@@ -27,9 +38,15 @@ public class ProjectService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<ProjectDto> getProjectById(Long id) {
-        return projectRepository.findById(id)
-                .map(this::convertToDto);
+    public Optional<ProjectWithUserDto> getProjectById(Long id) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new ProjectNotFoundException(id));
+
+        RestTemplate restTemplate = new RestTemplate();
+        String url = userServiceUrl + "/api/users/" + project.getManagerId();
+        User user = restTemplate.getForObject(url, User.class);
+
+        return Optional.of(projectMapper.convertToProjectWithUserDto(project, user));
     }
 
     public List<ProjectDto> getProjectsByManagerId(Long managerId) {
