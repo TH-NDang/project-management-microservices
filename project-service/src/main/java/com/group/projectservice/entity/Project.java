@@ -39,10 +39,12 @@ public class Project {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default
     private ProjectStatus status = ProjectStatus.PLANNING;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default
     private ProjectPriority priority = ProjectPriority.MEDIUM;
 
     @Column(name = "manager_id", nullable = false)
