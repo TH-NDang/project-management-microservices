@@ -4,11 +4,20 @@ import com.group.projectservice.dto.ProjectWithUserDto;
 import com.group.projectservice.entity.Project;
 import com.group.projectservice.external.User;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 @Component
 public class ProjectMapper {
-    public ProjectWithUserDto convertToProjectWithUserDto(Project project, User user) {
+    @Value("${user-service.url}")
+    private String userServiceUrl;
+
+    public ProjectWithUserDto convertToProjectWithUserDto(Project project) {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = userServiceUrl + "/api/users/" + project.getManagerId();
+        User user = restTemplate.getForObject(url, User.class);
+
         return ProjectWithUserDto.builder()
                 .id(project.getId())
                 .name(project.getName())

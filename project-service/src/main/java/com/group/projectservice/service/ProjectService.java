@@ -29,9 +29,6 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectMapper projectMapper;
 
-    @Value("${user-service.url}")
-    private String userServiceUrl;
-
     public List<ProjectDto> getAllProjects() {
         return projectRepository.findAll().stream()
                 .map(this::convertToDto)
@@ -42,11 +39,7 @@ public class ProjectService {
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new ProjectNotFoundException(id));
 
-        RestTemplate restTemplate = new RestTemplate();
-        String url = userServiceUrl + "/api/users/" + project.getManagerId();
-        User user = restTemplate.getForObject(url, User.class);
-
-        return Optional.of(projectMapper.convertToProjectWithUserDto(project, user));
+        return Optional.of(projectMapper.convertToProjectWithUserDto(project));
     }
 
     public List<ProjectDto> getProjectsByManagerId(Long managerId) {
